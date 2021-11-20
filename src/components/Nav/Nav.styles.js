@@ -28,6 +28,7 @@ export const FigureState = styled.img`
   hight: 40px;
   width: 40px;
   margin: 0px 0px 0px 0px;
+  cursor: pointer;
 `;
 export const TextState = styled.a`
   color: white;

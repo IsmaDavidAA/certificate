@@ -6,6 +6,7 @@ import {
   FigureState,
   TextName,
 } from './Nav.styles';
+import { Link } from 'react-router-dom';
 import loginIcon from '../../images/iniciar-sesion.png';
 import logoutIcon from '../../images/logout.png';
 import { getAuth, signOut } from 'firebase/auth';
@@ -35,7 +36,9 @@ const Nav = () => {
           {!currentUser ? (
             <>
               <TextState href="/login">LOGIN</TextState>
-              <FigureState src={loginIcon}></FigureState>
+              <Link to={`/login`}>
+                <FigureState src={loginIcon} onClick={() => {}}></FigureState>
+              </Link>
             </>
           ) : (
             <>
@@ -54,7 +57,19 @@ const Nav = () => {
               >
                 LOGOUT
               </TextState>
-              <FigureState src={logoutIcon}></FigureState>
+              <FigureState
+                src={logoutIcon}
+                onClick={() => {
+                  signOut(auth)
+                    .then(() => {
+                      window.location.reload();
+                      // Sign-out successful.
+                    })
+                    .catch(error => {
+                      // An error happened.
+                    });
+                }}
+              ></FigureState>
             </>
           )}
         </WrapperState>
