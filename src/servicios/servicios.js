@@ -1,21 +1,109 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
 import {
-  browserLocalPersistence,
-  getAuth,
-  setPersistence,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
-const firebaseConfig = {
-  apiKey: 'AIzaSyDMWVoo523-lXFcu8XZLdoin4eZQ41kdT4',
-  authDomain: 'certificate-1cac5.firebaseapp.com',
-  projectId: 'certificate-1cac5',
-  storageBucket: 'certificate-1cac5.appspot.com',
-  messagingSenderId: '894487497232',
-  appId: '1:894487497232:web:50029edaec6347a5e8d895',
-  measurementId: 'G-EHB473KQ87',
-};
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  getDoc,
+  orderBy,
+  limit,
+  updateDoc,
+  setDoc,
+  increment,
+  deleteDoc,
+  addDoc,
+} from 'firebase/firestore';
+import { db } from './firebase';
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+const listaCursos = 'curso';
+const administrador = 'administrador';
+const listaInscripciones = 'inscripcion';
+const estudiante = 'estudiante';
+
+export const apiSettings = {
+  getCursos: async () => {
+    const datos = await getDocs(collection(db, listaCursos));
+    let datosJson = [];
+    datos.forEach(doc => {
+      datosJson.push([doc.id, doc.data()]);
+    });
+    if (datosJson === []) {
+      datosJson = [{}];
+    }
+    return await datosJson;
+  },
+  getCurso: async idCurso => {
+    const curso = await getDoc(doc(db, listaCursos, idCurso));
+    return [curso.id, curso.data()];
+  },
+
+  getTopCursos: async () => {
+    const q = query(
+      collection(db, listaCursos),
+      orderBy('cantInscritos', 'desc'),
+      limit(3)
+    );
+    const querySnapshot = await getDocs(q);
+    let datosJson = [];
+    querySnapshot.forEach(doc => {
+      datosJson.push([doc.id, doc.data()]);
+    });
+    if (datosJson === []) {
+      datosJson = [{}];
+    }
+    console.log(datosJson);
+    return await datosJson;
+  },
+
+  postInscripcion: async (idCurso, idEst) => {
+    await addDoc(collection(db, listaInscripciones), {
+      codCurso: idCurso,
+      codEst: idEst,
+      estadoInscripcion: 1,
+    });
+    return true;
+  },
+
+  dropOutCourse: async idIns => {
+    await deleteDoc(doc(db, listaInscripciones, idIns));
+    return true;
+  },
+
+  putCurso: async idCurso => {
+    await updateDoc(doc(db, listaCursos, idCurso), {
+      cantInscritos: increment(1),
+    });
+    return true;
+  },
+
+  updateCourse: async idCurso => {
+    await updateDoc(doc(db, listaCursos, idCurso), {
+      cantInscritos: increment(-1),
+    });
+    return true;
+  },
+
+  getInscrito: async (idCurso, idEst) => {
+    let existe = false;
+    const q = query(
+      collection(db, listaInscripciones),
+      where('codCurso', '==', idCurso),
+      where('codEst', '==', idEst)
+    );
+    const querySnapshot = await getDocs(q);
+    let idIns;
+    querySnapshot.forEach(doc => {
+      existe = true;
+      idIns = doc.id;
+      console.log('oka');
+    });
+
+    return [existe, idIns];
+  },
+
+  getName: async userId => {
+    const user = await getDoc(doc(db, administrador, userId));
+    console.log(user.data());
+    return user.data();
+  },
+};

@@ -7,19 +7,6 @@ const Home = () => {
   return (
     <>
       <h1>Home</h1>
-      <button
-        onClick={() => {
-          signOut(auth)
-            .then(() => {
-              // Sign-out successful.
-            })
-            .catch(error => {
-              // An error happened.
-            });
-        }}
-      >
-        Sign out
-      </button>
     </>
   );
 };
