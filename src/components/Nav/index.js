@@ -1,25 +1,27 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { WrapperState, WrapperNav, TextState, FigureState } from './Nav.styles';
+import {
+  WrapperState,
+  WrapperNav,
+  TextState,
+  FigureState,
+  TextName,
+} from './Nav.styles';
 import loginIcon from '../../images/iniciar-sesion.png';
 import logoutIcon from '../../images/logout.png';
-import { useHistory } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import { AuthContext } from '../../Context';
 import { apiSettings } from '../../servicios/servicios';
 
 const Nav = () => {
-  const [user, setUser] = useState([]);
+  // const [user, setUser] = useState([]);
   const [nombre, setNombre] = useState('');
   const { currentUser } = useContext(AuthContext);
   const auth = getAuth();
-  const history = useHistory();
 
   const fetchName = async () => {
     if (currentUser) {
       const temp = await apiSettings.getName(currentUser.uid);
-      setUser(temp[1]);
-      setNombre(temp[1].nombreCompleto);
-      console.log(temp);
+      setNombre(temp.nombre);
     }
   };
   useEffect(() => {
@@ -30,8 +32,31 @@ const Nav = () => {
     <>
       <WrapperNav>
         <WrapperState>
-          <TextState href="/login">Login</TextState>
-          <FigureState src={loginIcon}></FigureState>
+          {!currentUser ? (
+            <>
+              <TextState href="/login">LOGIN</TextState>
+              <FigureState src={loginIcon}></FigureState>
+            </>
+          ) : (
+            <>
+              <TextName>{nombre}</TextName>
+              <TextState
+                href="/"
+                onClick={() => {
+                  signOut(auth)
+                    .then(() => {
+                      // Sign-out successful.
+                    })
+                    .catch(error => {
+                      // An error happened.
+                    });
+                }}
+              >
+                LOGOUT
+              </TextState>
+              <FigureState src={logoutIcon}></FigureState>
+            </>
+          )}
         </WrapperState>
       </WrapperNav>
     </>

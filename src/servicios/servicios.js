@@ -16,7 +16,7 @@ import {
 import { db } from './firebase';
 
 const listaCursos = 'curso';
-const listaTemarios = 'temario';
+const administrador = 'administrador';
 const listaInscripciones = 'inscripcion';
 const estudiante = 'estudiante';
 
@@ -102,8 +102,8 @@ export const apiSettings = {
   },
 
   getName: async userId => {
-    const user = await getDoc(doc(db, estudiante, userId));
-    console.log(user);
-    return [user.id, user.data()];
+    const user = await getDoc(doc(db, administrador, userId));
+    console.log(user.data());
+    return user.data();
   },
 };
