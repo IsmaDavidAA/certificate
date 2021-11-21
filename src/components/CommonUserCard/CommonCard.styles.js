@@ -11,10 +11,20 @@ export const WrapperCommonUser = styled.div`
   align-items: center;
   padding: 0px 15px 20px 15px;
   justify-content: space-between;
+
+  @media only screen and (max-width: 450px) {
+    max-width: 460px;
+    padding: 0px 0px 0px 0px;
+    margin: 100px 0px 0px 0px;
+  }
 `;
 
 export const MySelect = styled(Select)`
   width: 100%;
+  @media only screen and (max-width: 450px) {
+    max-width: 340px;
+    padding: 0px 5px 20px 5px;
+  }
 `;
 
 export const ImageLogo = styled.img`
@@ -25,6 +35,11 @@ export const ImageLogo = styled.img`
 export const Title = styled.h2`
   color: #161d6f;
   font-size: 28px;
+  @media only screen and (max-width: 450px) {
+    max-width: 300px;
+    padding: 0px 10px 20px 10px;
+    text-align: center;
+  }
 `;
 
 export const FormDownloadCertificate = styled.form`
@@ -33,12 +48,16 @@ export const FormDownloadCertificate = styled.form`
   align-items: center;
   margin: 0px 85px 0px 85px;
   height: 100%;
+  @media only screen and (max-width: 450px) {
+    max-width: 350px;
+    margin: 0px 8px 20px 8px;
+  }
 `;
 
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 8px;
   font-weight: 18px;
 `;
 
@@ -48,7 +67,7 @@ export const Input = styled.input`
   background: transparent;
   outline: none;
   height: 36px;
-  min-width: 240px;
+  min-width: 220px;
   color: #161d6f;
   font-size: 14px;
 `;
@@ -60,6 +79,4 @@ export const ButtonDownload = styled.img`
   cursor: pointer;
 `;
 
-export const DownloadFile = styled.a`
- 
-` 
+export const DownloadFile = styled.a``;
