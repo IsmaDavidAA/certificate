@@ -11,8 +11,10 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Login from './Views/LoginView/Login';
-import Home from './Views/Home';
+import Home from './Views/Homeview/Home';
 import Nav from './components/Nav';
+import { GlobalStyle } from './GlobalStyle';
+
 function App() {
   return (
     <>
@@ -25,6 +27,7 @@ function App() {
             <Redirect path="/" exact component={Home} />
           </Switch>
         </Router>
+        <GlobalStyle />
       </AuthProvider>
     </>
   );
