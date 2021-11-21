@@ -25,17 +25,6 @@ const SignIn = ({ history }) => {
   }
   return (
     <WrapperView>
-      {/* <form onSubmit={handleLogin}>
-        <label>
-          Email
-          <input name="email" type="email" placeholder="Email" />
-        </label>
-        <label>
-          Password
-          <input name="password" type="password" placeholder="Password" />
-        </label>
-        <button type="submit">Log in</button>
-      </form> */}
       <LoginCard handleLogin={handleLogin}></LoginCard>
       <TextSoft>BY CERTIFICATE</TextSoft>
     </WrapperView>

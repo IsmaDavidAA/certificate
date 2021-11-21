@@ -8,12 +8,12 @@ import {
   WrapperLogin,
   Input,
 } from './LoginCard.styles';
-const LoginCard = handleLogin => {
+const LoginCard = props => {
   return (
     <>
       <WrapperLogin>
         <TitleLogin>LOGIN</TitleLogin>
-        <FormLogin onSubmit={handleLogin}>
+        <FormLogin onSubmit={props.handleLogin}>
           <Label>
             Email
             <Input name="email" type="email" placeholder="Email" />

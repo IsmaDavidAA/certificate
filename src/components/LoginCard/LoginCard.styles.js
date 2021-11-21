@@ -40,7 +40,7 @@ export const Input = styled.input`
   height: 36px;
   min-width: 240px;
   color: #161d6f;
-  font-size: 12px;
+  font-size: 14px;
 `;
 
 export const ButtonLogin = styled.button`
@@ -52,4 +52,5 @@ export const ButtonLogin = styled.button`
   outline: none;
   border: none;
   padding: 7px;
+  cursor: pointer;
 `;
