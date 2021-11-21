@@ -1,11 +1,11 @@
 import React, { useCallback, useContext } from 'react';
-import { auth } from '../servicios/firebase';
-import { AuthContext } from '../Context';
+import { auth } from '../../servicios/firebase';
+import { AuthContext } from '../../Context';
 import { withRouter, Redirect } from 'react-router-dom';
 import { signInWithEmailAndPassword } from '@firebase/auth';
-
+import { TextSoft, WrapperView } from './Login.styles';
+import LoginCard from '../../components/LoginCard';
 const SignIn = ({ history }) => {
-  //Obtenemos el estado del user en el context
   const handleLogin = useCallback(
     async event => {
       event.preventDefault();
@@ -24,9 +24,8 @@ const SignIn = ({ history }) => {
     return <Redirect to="/" />;
   }
   return (
-    <div>
-      <h1>Log in</h1>
-      <form onSubmit={handleLogin}>
+    <WrapperView>
+      {/* <form onSubmit={handleLogin}>
         <label>
           Email
           <input name="email" type="email" placeholder="Email" />
@@ -36,8 +35,10 @@ const SignIn = ({ history }) => {
           <input name="password" type="password" placeholder="Password" />
         </label>
         <button type="submit">Log in</button>
-      </form>
-    </div>
+      </form> */}
+      <LoginCard handleLogin={handleLogin}></LoginCard>
+      <TextSoft>BY CERTIFICATE</TextSoft>
+    </WrapperView>
   );
 };
 
