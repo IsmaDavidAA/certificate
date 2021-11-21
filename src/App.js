@@ -10,7 +10,7 @@ import {
   useParams,
   Redirect,
 } from 'react-router-dom';
-import Login from './Views/Login';
+import Login from './Views/LoginView/Login';
 import Home from './Views/Home';
 import Nav from './components/Nav';
 function App() {
