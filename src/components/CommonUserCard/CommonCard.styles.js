@@ -22,12 +22,12 @@ export const ImageLogo = styled.img`
   max-height: 200px;
 `;
 
-export const TitleLogin = styled.h2`
+export const Title = styled.h2`
   color: #161d6f;
   font-size: 28px;
 `;
 
-export const FormLogin = styled.form`
+export const FormDownloadCertificate = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,14 +53,13 @@ export const Input = styled.input`
   font-size: 14px;
 `;
 
-export const ButtonLogin = styled.button`
-  justify-self: flex-end;
-  background: #161d6f;
-  color: #fff;
-  margin-top: 14px;
-  font-size: 18px;
-  outline: none;
-  border: none;
-  padding: 7px;
+export const ButtonDownload = styled.img`
+  hight: 40px;
+  width: 40px;
+  margin: 0px 0px 0px 0px;
   cursor: pointer;
 `;
+
+export const DownloadFile = styled.a`
+ 
+` 

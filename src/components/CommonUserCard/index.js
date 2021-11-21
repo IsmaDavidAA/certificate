@@ -1,11 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
+import downloadIcon from '../../images/file.png';
 import {
   ImageLogo,
   MySelect,
-  TitleLogin,
+  Title,
   WrapperCommonUser,
+  FormDownloadCertificate,
+  Label,
+  Input,
+  ButtonDownload,
+  DownloadFile,
 } from './CommonCard.styles';
-import Select from 'react-select';
+
 const CommonUserCard = props => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [options, setOptions] = useState([]);
@@ -26,7 +32,7 @@ const CommonUserCard = props => {
   return (
     <>
       <WrapperCommonUser>
-        <TitleLogin>Descargue su certificado</TitleLogin>
+        <Title>Descargue su certificado</Title>
 
         <MySelect
           value={selectedOption}
@@ -38,6 +44,23 @@ const CommonUserCard = props => {
         ) : (
           <ImageLogo src={selectedOption.logoLink}></ImageLogo>
         )}
+
+        <FormDownloadCertificate>
+          <Label>
+            Nombre
+            <Input />
+          </Label>
+          <Label>
+            CI
+            <Input />
+          </Label>
+        </FormDownloadCertificate>
+        <DownloadFile
+          download="tuCertificado.png"
+          href={selectedOption == null ? '' : selectedOption.logoLink}
+        >
+          <ButtonDownload src={downloadIcon} />
+        </DownloadFile>
       </WrapperCommonUser>
     </>
   );
