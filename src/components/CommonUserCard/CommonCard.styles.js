@@ -46,7 +46,7 @@ export const FormDownloadCertificate = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0px 85px 0px 85px;
+  margin: 0px;
   height: 100%;
   @media only screen and (max-width: 450px) {
     max-width: 350px;
@@ -72,11 +72,26 @@ export const Input = styled.input`
   font-size: 14px;
 `;
 
+export const InputInvisible = styled.input`
+  border: none;
+  border-bottom: 1px solid #161d6f;
+  background: transparent;
+  outline: none;
+  height: 36px;
+  min-width: 220px;
+  color: #161d6f;
+  font-size: 14px;
+  display none;
+`;
+
 export const ButtonDownload = styled.img`
   hight: 40px;
   width: 40px;
   margin: 0px 0px 0px 0px;
-  cursor: pointer;
 `;
 
-export const DownloadFile = styled.a``;
+export const DownloadFile = styled.button`
+  border: 0;
+  cursor: pointer;
+  background: white;
+`;
