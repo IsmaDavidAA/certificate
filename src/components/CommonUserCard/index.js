@@ -10,11 +10,11 @@ import {
   Input,
   ButtonDownload,
   DownloadFile,
+  InputInvisible,
 } from './CommonCard.styles';
 
 const CommonUserCard = props => {
   const [selectedOption, setSelectedOption] = useState(null);
-  const [options, setOptions] = useState([]);
   const extractOptions = value => {
     let option = [];
     if (value) {
@@ -33,34 +33,46 @@ const CommonUserCard = props => {
     <>
       <WrapperCommonUser>
         <Title>Descargue su certificado</Title>
-
-        <MySelect
-          value={selectedOption}
-          onChange={setSelectedOption}
-          options={extractOptions(props.certificados)}
-        ></MySelect>
-        {selectedOption == null ? (
-          <></>
-        ) : (
-          <ImageLogo src={selectedOption.logoLink}></ImageLogo>
-        )}
-
-        <FormDownloadCertificate>
+        <FormDownloadCertificate onSubmit={props.handleGetMyDocument}>
+          <MySelect
+            value={selectedOption}
+            onChange={setSelectedOption}
+            options={extractOptions(props.certificados)}
+            name="certificado"
+          ></MySelect>
+          {selectedOption == null ? (
+            <></>
+          ) : (
+            <ImageLogo src={selectedOption.logoLink}></ImageLogo>
+          )}
           <Label>
-            Nombre
-            <Input />
+            Nombre/s
+            <Input name="nombres" type="text" placeholder="Nombre/s usuario" />
+          </Label>
+          <Label>
+            Apellido/s
+            <Input
+              name="apellidos"
+              type="text"
+              placeholder="Apellido/s usuario"
+            />
           </Label>
           <Label>
             CI
-            <Input />
+            <Input
+              name="ci"
+              type="number"
+              placeholder="Documento de identidad"
+            />
           </Label>
+          <DownloadFile
+            // download="tuCertificado.png"
+            // href={selectedOption == null ? '' : selectedOption.logoLink}
+            type="submit"
+          >
+            <ButtonDownload src={downloadIcon} />
+          </DownloadFile>
         </FormDownloadCertificate>
-        <DownloadFile
-          download="tuCertificado.png"
-          href={selectedOption == null ? '' : selectedOption.logoLink}
-        >
-          <ButtonDownload src={downloadIcon} />
-        </DownloadFile>
       </WrapperCommonUser>
     </>
   );

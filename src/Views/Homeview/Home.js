@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import CommonUserCard from '../../components/CommonUserCard';
 import { apiSettings } from '../../servicios/servicios';
 import { WrapperView, TextSoft } from './Home.styles';
-const Home = () => {
+const Home = ({ history }) => {
   const [certificados, setCertificados] = useState('');
 
   useEffect(() => {
@@ -13,11 +13,31 @@ const Home = () => {
 
     fetchCertificados();
   }, []);
-
+  const handleGetMyDocument = useCallback(
+    async event => {
+      event.preventDefault();
+      const { certificado, nombres, apellidos, ci } = event.target.elements;
+      try {
+        const existe = await apiSettings.getCertificate(
+          certificado.value,
+          nombres.value,
+          apellidos.value,
+          ci.value
+        );
+        console.log(existe);
+      } catch (error) {
+        alert(error);
+      }
+    },
+    [history]
+  );
   return (
     <>
       <WrapperView>
-        <CommonUserCard certificados={certificados}></CommonUserCard>
+        <CommonUserCard
+          certificados={certificados}
+          handleGetMyDocument={handleGetMyDocument}
+        ></CommonUserCard>
         <TextSoft>BY CERTIFICATE</TextSoft>
       </WrapperView>
     </>
